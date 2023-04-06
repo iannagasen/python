@@ -38,3 +38,49 @@ _117_modules
       - java does not have the notion of global namespace like python does,
         all variables and functions must be defined within a class or method
           
+
+
+------------------------------------------
+_118_script_writing
+  
+  Any file can execute either as a script or as a library imported with import
+  To better support imports, script code is often enclosed with a conditional check against the module name:
+
+  __name__ 
+    - a builtin variable that always contains the name of the enclosing module.
+    - if a program is run as the main script such as `python readport.py`,
+      - the __name__ variable is set to '__main__'
+    - otherwise, if the code is imported using a statement such as `import readport`
+      - the __name__ variable is set to 'readport'
+
+
+------------------------------------------
+_119_packages
+
+  The directory should have an __init__.py file, which may be empty. 
+  Once you’ve done this, you should be able to make nested import statements. 
+  For example:
+    import tutorial.readport 
+    port = tutorial.readport.read_portfolio('portfolio.dat')
+  shorter alternative
+    from tutorial.readport import read_portfolio
+    port = read_portfolio('portfolio.dat')
+  
+  Structuring a project:
+  --
+  tutorial-project/ 
+    tutorial/
+      __init__.py 
+      readport.py 
+      pcost.py 
+      stack.py 
+      ...
+    tests/
+      test_stack.py 
+      test_pcost.py 
+      ...
+    examples/
+      sample.py 
+      ...
+    doc/
+      tutorial.txt
